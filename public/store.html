@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hylex Store</title>
+<link rel="icon" href="moon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#000;
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+}
+
+header{
+    padding:25px;
+    text-align:center;
+    border-bottom:1px solid #222;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+    font-weight:600;
+}
+
+nav{
+    margin-top:20px;
+}
+
+.nav-btn{
+    display:inline-block;
+    padding:14px 28px;
+    margin:8px;
+    background:#111;
+    color:#fff;
+    text-decoration:none;
+    border:1px solid #fff;
+    border-radius:24px;
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    background:#fff;
+    color:#000;
+}
+
+.hero{
+    text-align:center;
+    padding:60px 20px 30px;
+}
+
+.hero h2{
+    font-size:42px;
+    margin:0;
+}
+
+.hero p{
+    color:#bdbdbd;
+    margin-top:10px;
+}
+
+.wrap{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    padding:40px 20px 80px;
+}
+
+.card{
+    width:320px;
+    background:#111;
+    border:1px solid #222;
+    border-radius:32px;
+    padding:30px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#444;
+}
+
+.card h2{
+    margin:0;
+    font-size:28px;
+}
+
+.price{
+    font-size:34px;
+    font-weight:700;
+    margin:15px 0;
+}
+
+ul{
+    color:#d0d0d0;
+    padding-left:20px;
+    line-height:1.8;
+}
+
+.pay{
+    margin-top:20px;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    border-top:1px solid #222;
+    color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Hylex</h1>
+
+    <nav>
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="store.html" class="nav-btn">Store</a>
+        <a href="about.html" class="nav-btn">About Us</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Choose Your Plan</h2>
+    <p>Professional website hosting and development packages.</p>
+</section>
+
+<div class="wrap">
+
+    <div class="card">
+        <h2>Basic</h2>
+        <div class="price">$1.99</div>
+
+        <ul>
+            <li>1 year custom website built by us</li>
+            <li>1 year hosting included</li>
+            <li>1 free subdomain</li>
+            <li>Simple protection included</li>
+            <li>Connect 1 custom domain</li>
+        </ul>
+
+        <div class="pay" id="p1"></div>
+    </div>
+
+    <div class="card">
+        <h2>Advanced</h2>
+        <div class="price">$2.99</div>
+
+        <ul>
+            <li>1 year custom website built by us</li>
+            <li>Faster hosting</li>
+            <li>Server backups</li>
+            <li>2 free subdomains</li>
+            <li>Enhanced protection</li>
+            <li>Connect 1 custom domain</li>
+        </ul>
+
+        <div class="pay" id="p2"></div>
+    </div>
+
+    <div class="card">
+        <h2>Superior</h2>
+        <div class="price">$3.99</div>
+
+        <ul>
+            <li>1 year custom website built by us</li>
+            <li>Priority high-speed hosting</li>
+            <li>24/7 support</li>
+            <li>Automatic backups</li>
+            <li>2 free subdomains</li>
+            <li>Connect 2 custom domains</li>
+        </ul>
+
+        <div class="pay" id="p3"></div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Hylex. All rights reserved.
+</footer>
+
+<script src="https://www.paypal.com/sdk/js?client-id=Aej7fxdMW8Sh5ScyoTTPd8WVZn6JSUxO6f_ErSHRFkqNj_6chuwvDBMUAlsOVjoT5I3B-sB8MReDMSKt&currency=USD"></script>
+
+<script>
+function pay(amount,id){
+    paypal.Buttons({
+        createOrder:(data,actions)=>{
+            return actions.order.create({
+                purchase_units:[{
+                    amount:{value:amount}
+                }]
+            });
+        },
+        onApprove:(data,actions)=>{
+            return actions.order.capture().then(()=>{
+                alert("Payment successful!");
+            });
+        }
+    }).render(id);
+}
+
+pay("1.99","#p1");
+pay("2.99","#p2");
+pay("3.99","#p3");
+</script>
+
+</body>
+</html>
