@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hylex Store</title>
-    <link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" href="moon.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -83,6 +83,9 @@ nav{
     border-radius:32px;
     padding:30px;
     transition:.3s;
+
+    display:flex;
+    flex-direction:column;
 }
 
 .card:hover{
@@ -105,10 +108,27 @@ ul{
     color:#d0d0d0;
     padding-left:20px;
     line-height:1.8;
+    flex-grow:1;
 }
 
 .pay{
-    margin-top:20px;
+    margin-top:auto;
+}
+
+.pay-btn{
+    display:block;
+    text-align:center;
+    padding:14px 20px;
+    background:#fff;
+    color:#000;
+    text-decoration:none;
+    border-radius:25px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.pay-btn:hover{
+    background:#ccc;
 }
 
 footer{
@@ -118,6 +138,7 @@ footer{
     color:#777;
 }
 </style>
+
 </head>
 
 <body>
@@ -132,15 +153,20 @@ footer{
     </nav>
 </header>
 
+
 <section class="hero">
     <h2>Choose Your Plan</h2>
     <p>Professional website hosting and development packages.</p>
 </section>
 
+
 <div class="wrap">
 
+
     <div class="card">
+
         <h2>Basic</h2>
+
         <div class="price">$1.99</div>
 
         <ul>
@@ -151,11 +177,20 @@ footer{
             <li>Connect 1 custom domain</li>
         </ul>
 
-        <div class="pay" id="p1"></div>
+        <div class="pay">
+            <a class="pay-btn" href="https://discord.com/invite/qfeV3JHhY6">
+                Pay Now
+            </a>
+        </div>
+
     </div>
 
+
+
     <div class="card">
+
         <h2>Advanced</h2>
+
         <div class="price">$2.99</div>
 
         <ul>
@@ -167,11 +202,20 @@ footer{
             <li>Connect 1 custom domain</li>
         </ul>
 
-        <div class="pay" id="p2"></div>
+        <div class="pay">
+            <a class="pay-btn" href="https://discord.com/invite/qfeV3JHhY6">
+                Pay Now
+            </a>
+        </div>
+
     </div>
 
+
+
     <div class="card">
+
         <h2>Superior</h2>
+
         <div class="price">$3.99</div>
 
         <ul>
@@ -183,39 +227,22 @@ footer{
             <li>Connect 2 custom domains</li>
         </ul>
 
-        <div class="pay" id="p3"></div>
+        <div class="pay">
+            <a class="pay-btn" href="https://discord.com/invite/qfeV3JHhY6">
+                Pay Now
+            </a>
+        </div>
+
     </div>
 
+
 </div>
+
 
 <footer>
     © 2026 Hylex. All rights reserved.
 </footer>
 
-<script src="https://www.paypal.com/sdk/js?client-id=Aej7fxdMW8Sh5ScyoTTPd8WVZn6JSUxO6f_ErSHRFkqNj_6chuwvDBMUAlsOVjoT5I3B-sB8MReDMSKt&currency=USD"></script>
-
-<script>
-function pay(amount,id){
-    paypal.Buttons({
-        createOrder:(data,actions)=>{
-            return actions.order.create({
-                purchase_units:[{
-                    amount:{value:amount}
-                }]
-            });
-        },
-        onApprove:(data,actions)=>{
-            return actions.order.capture().then(()=>{
-                alert("Payment successful!");
-            });
-        }
-    }).render(id);
-}
-
-pay("1.99","#p1");
-pay("2.99","#p2");
-pay("3.99","#p3");
-</script>
 
 </body>
 </html>
