@@ -16,14 +16,14 @@ text-align:center;
 header{
 background:#1a73e8;
 color:white;
-padding:20px;
+padding:22px;
 font-size:22px;
 font-weight:600;
 }
 
 h1{
-margin:20px 0;
 color:#1a73e8;
+margin:20px;
 }
 
 .wrap{
@@ -31,13 +31,12 @@ display:flex;
 justify-content:center;
 gap:20px;
 flex-wrap:wrap;
-margin-top:30px;
-padding:20px;
+padding:30px;
 }
 
 .card{
 background:white;
-width:280px;
+width:290px;
 padding:20px;
 border-radius:14px;
 box-shadow:0 4px 14px rgba(0,0,0,0.08);
@@ -46,38 +45,25 @@ text-align:left;
 
 .card h2{
 color:#1a73e8;
-margin-bottom:5px;
+margin:0;
 }
 
 .price{
 font-size:20px;
 font-weight:700;
 margin:10px 0;
-color:#111827;
 }
 
 ul{
-padding-left:18px;
-text-align:left;
 font-size:14px;
 color:#374151;
+padding-left:18px;
 }
 
-button{
+.pay{
 margin-top:10px;
-padding:10px;
-width:100%;
-border:none;
-border-radius:10px;
-background:#1a73e8;
-color:white;
-cursor:pointer;
-font-weight:600;
 }
 
-button:hover{
-background:#1558c0;
-}
 </style>
 </head>
 <body>
@@ -98,7 +84,7 @@ background:#1558c0;
 <li>Simple protection included</li>
 <li>Option to connect 1 custom domain</li>
 </ul>
-<button onclick="buy(1.99)">Buy Basic</button>
+<div class="pay" id="p1"></div>
 </div>
 
 <div class="card">
@@ -112,7 +98,7 @@ background:#1558c0;
 <li>Better protection and stability</li>
 <li>Option to connect 1 custom domain</li>
 </ul>
-<button onclick="buy(2.99)">Buy Advanced</button>
+<div class="pay" id="p2"></div>
 </div>
 
 <div class="card">
@@ -121,34 +107,39 @@ background:#1558c0;
 <ul>
 <li>1 year custom website built by us</li>
 <li>Priority high speed hosting</li>
-<li>24/7 support + auto server backups</li>
-<li>Unlimited subdomain switches (2 active at a time)</li>
+<li>24/7 support + auto backups</li>
+<li>Unlimited subdomain switching (2 active)</li>
 <li>2 free subdomains</li>
 <li>Option to connect 2 custom domains</li>
 </ul>
-<button onclick="buy(3.99)">Buy Superior</button>
+<div class="pay" id="p3"></div>
 </div>
 
 </div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
 
 <script>
-async function buy(amount){
-const r=await fetch("/create-order",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({amount})
+function pay(amount, id){
+paypal.Buttons({
+createOrder: (data, actions) => {
+return actions.order.create({
+purchase_units: [{
+amount: { value: amount }
+}]
 });
-
-const d=await r.json();
-
-await fetch("/capture-order",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({orderID:d.id})
-});
-
+},
+onApprove: (data, actions) => {
+return actions.order.capture().then(() => {
 alert("Payment successful");
+});
 }
+}).render(id);
+}
+
+pay("1.99","#p1");
+pay("2.99","#p2");
+pay("3.99","#p3");
 </script>
 
 </body>
