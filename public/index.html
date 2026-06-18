@@ -2,56 +2,146 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Store</title>
+<title>Dolphin Sites</title>
+<link rel="icon" href="dolphin.png">
 <style>
-body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;text-align:center}
-h1{margin-top:30px}
-.wrap{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:40px}
-.card{background:#1c1c1c;width:220px;padding:20px;border-radius:10px}
-.price{font-size:22px;margin:10px 0}
-button{padding:10px;width:100%;border:none;border-radius:8px;background:purple;color:#fff;cursor:pointer}
+body{
+margin:0;
+font-family:Arial;
+background:#f5f7ff;
+color:#0f172a;
+text-align:center;
+}
+
+header{
+background:#1a73e8;
+color:white;
+padding:20px;
+font-size:22px;
+font-weight:600;
+}
+
+h1{
+margin:20px 0;
+color:#1a73e8;
+}
+
+.wrap{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:30px;
+padding:20px;
+}
+
+.card{
+background:white;
+width:280px;
+padding:20px;
+border-radius:14px;
+box-shadow:0 4px 14px rgba(0,0,0,0.08);
+text-align:left;
+}
+
+.card h2{
+color:#1a73e8;
+margin-bottom:5px;
+}
+
+.price{
+font-size:20px;
+font-weight:700;
+margin:10px 0;
+color:#111827;
+}
+
+ul{
+padding-left:18px;
+text-align:left;
+font-size:14px;
+color:#374151;
+}
+
+button{
+margin-top:10px;
+padding:10px;
+width:100%;
+border:none;
+border-radius:10px;
+background:#1a73e8;
+color:white;
+cursor:pointer;
+font-weight:600;
+}
+
+button:hover{
+background:#1558c0;
+}
 </style>
 </head>
 <body>
 
-<h1>My Store</h1>
+<header>Dolphin Sites Packages</header>
+
+<h1>Choose Your Plan</h1>
 
 <div class="wrap">
 
 <div class="card">
-<h2>Package 1</h2>
-<p>Edit description</p>
+<h2>Basic</h2>
 <div class="price">$1.99</div>
-<button onclick="buy(1.99)">Buy</button>
+<ul>
+<li>1 year custom website built by us</li>
+<li>1 year hosting included</li>
+<li>1 free subdomain</li>
+<li>Simple protection included</li>
+<li>Option to connect 1 custom domain</li>
+</ul>
+<button onclick="buy(1.99)">Buy Basic</button>
 </div>
 
 <div class="card">
-<h2>Package 2</h2>
-<p>Edit description</p>
+<h2>Advanced</h2>
 <div class="price">$2.99</div>
-<button onclick="buy(2.99)">Buy</button>
+<ul>
+<li>1 year custom website built by us</li>
+<li>Faster hosting</li>
+<li>Server backups</li>
+<li>2 free subdomains</li>
+<li>Better protection and stability</li>
+<li>Option to connect 1 custom domain</li>
+</ul>
+<button onclick="buy(2.99)">Buy Advanced</button>
 </div>
 
 <div class="card">
-<h2>Package 3</h2>
-<p>Edit description</p>
+<h2>Superior</h2>
 <div class="price">$3.99</div>
-<button onclick="buy(3.99)">Buy</button>
+<ul>
+<li>1 year custom website built by us</li>
+<li>Priority high speed hosting</li>
+<li>24/7 support + auto server backups</li>
+<li>Unlimited subdomain switches (2 active at a time)</li>
+<li>2 free subdomains</li>
+<li>Option to connect 2 custom domains</li>
+</ul>
+<button onclick="buy(3.99)">Buy Superior</button>
 </div>
 
 </div>
 
 <script>
 async function buy(amount){
-const r = await fetch("/create-order", {
+const r=await fetch("/create-order",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({amount})
 });
 
-const d = await r.json();
+const d=await r.json();
 
-await fetch("/capture-order", {
+await fetch("/capture-order",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({orderID:d.id})
